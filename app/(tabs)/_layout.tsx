@@ -6,6 +6,9 @@ import { Pressable } from 'react-native';
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import { FontAwesome6 } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -26,21 +29,24 @@ export default function TabLayout() {
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
       }}>
+
+      <Tabs.Screen
+        name="cats"
+        options={{
+          title: 'Kotki',
+          tabBarIcon: ({ color }) => <FontAwesome5 name="cat" size={24} color="black" />
+        }}
+      />
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Home',
+          tabBarIcon: ({ color }) => <FontAwesome5 name="home" size={24} color="black" />,
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
                 {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
+                  <MaterialCommunityIcons name="language-typescript" size={24} color="black" />
                 )}
               </Pressable>
             </Link>
@@ -48,16 +54,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-      <Tabs.Screen
         name="dogs"
         options={{
-          title: 'Pieski'
+          title: 'Pieski',
+          tabBarIcon: ({ color }) => <FontAwesome6 name="dog" size={24} color="black" />
+
+
         }}
       />
 
