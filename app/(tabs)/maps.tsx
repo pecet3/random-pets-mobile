@@ -1,7 +1,7 @@
 import { useNavigation } from 'expo-router';
 import React, { useState, useEffect, useRef } from 'react';
 import { Platform, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Region } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Region, UserLocationChangeEvent } from 'react-native-maps';
 import * as Location from 'expo-location';
 
 const initialRegion = {
@@ -14,6 +14,8 @@ const initialRegion = {
 export default function MapsView() {
   const mapRef = useRef<any>(null)
   const nav = useNavigation()
+  const [location, setLocation] = useState<Location.LocationObject | null>(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
     nav.setOptions({
@@ -38,8 +40,11 @@ export default function MapsView() {
   const onRegionChange = (region: Region) => {
 
   }
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+
+  const onUserLocationChange = (coords: UserLocationChangeEvent) => {
+    console.log(location)
+  }
+
 
   useEffect(() => {
     (async () => {
@@ -52,7 +57,7 @@ export default function MapsView() {
 
       let location = await Location.getCurrentPositionAsync({});
       console.log(location.coords.latitude, location.coords.longitude)
-      setLocation(location as any);
+      setLocation(location);
     })();
   }, []);
 
@@ -78,6 +83,8 @@ export default function MapsView() {
         ref={mapRef}
         showsPointsOfInterest={false}
         mapType={'satellite'}
+        onRegionChange={onRegionChange}
+        onUserLocationChange={onUserLocationChange}
       />
     </View>
   );
