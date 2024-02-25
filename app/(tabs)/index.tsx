@@ -1,14 +1,28 @@
-import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+import React, { useEffect } from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
 
-export default function TabOneScreen() {
+export default function HomeScreen() {
+  useEffect(() => {
+    console.log("test")
+
+  }, [])
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Pieski</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <Text style={styles.header}>Witaj w Naszej Aplikacji o Psach i Kotkach!</Text>
+
+      <Text style={styles.introText}>
+        Odkryj fascynujący świat czworonogów, przeglądając setki uroczych obrazków psów i kotków.
+        Nasza aplikacja dostarcza nie tylko rozkosznych zdjęć, ale również ciekawostek, porad i informacji
+        na temat różnych ras, ich pielęgnacji i zachowań.
+      </Text>
+
+
+      <Text style={styles.ctaText}>
+        Nie czekaj! Rozpocznij przygodę z naszą aplikacją i poznaj najbardziej urocze
+        i niezwykłe psy oraz koty.
+      </Text>
+
     </View>
   );
 }
@@ -16,16 +30,33 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
   },
-  title: {
-    fontSize: 20,
+  header: {
+    fontSize: 24,
     fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  introText: {
+    fontSize: 16,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  imageContainer: {
+    marginBottom: 20,
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  mainImage: {
+    width: 300,
+    height: 200,
+    resizeMode: 'cover',
+  },
+  ctaText: {
+    fontSize: 18,
+    textAlign: 'center',
   },
 });
